@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="hatimeria_dotpay.request.form" factory-method="getForm" factory-service="hatimeria_dotpay.request.form.builder" class="Symfony\Component\Form\Form" />
+
+        <service id="hatimeria_dotpay.request.form.builder" factory-method="createBuilder" factory-service="form.factory" class="Symfony\Component\Form\FormBuilder">
+            <argument type="service" id="hatimeria_dotpay.request.form.type" />
+            <argument />
+            <argument type="collection">
+                <argument key="data_class">%hatimeria_dotpay.forms.request.data_class%</argument>
+            </argument>
+        </service>
+
+        <service id="hatimeria_dotpay.request.form.type" class="%hatimeria_dotpay.forms.request.type%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="hatimeria_dotpay.request.form.handler" class="%hatimeria_dotpay.forms.request.handler%">
+            <argument type="service" id="hatimeria_dotpay.request.form" />
+            <argument type="service" id="logger" />
+            <argument>%hatimeria_dotpay.request%</argument>
+        </service>
+
+        
+
+        <service id="hatimeria_dotpay.response.form" factory-method="getForm" factory-service="hatimeria_dotpay.response.form.builder" class="Symfony\Component\Form\Form" />
+
+        <service id="hatimeria_dotpay.response.form.builder" factory-method="createBuilder" factory-service="form.factory" class="Symfony\Component\Form\FormBuilder">
+            <argument type="service" id="hatimeria_dotpay.response.form.type" />
+            <argument />
+            <argument type="collection">
+                <argument key="data_class">%hatimeria_dotpay.forms.response.data_class%</argument>
+            </argument>
+        </service>
+
+        <service id="hatimeria_dotpay.response.form.type" class="%hatimeria_dotpay.forms.response.type%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="hatimeria_dotpay.response.form.handler" class="%hatimeria_dotpay.forms.response.handler%" scope="request">
+            <argument type="service" id="hatimeria_dotpay.response.form" />
+            <argument type="service" id="request" />
+            <argument type="service" id="logger" />
+        </service>
+
+    </services>
+
+</container>

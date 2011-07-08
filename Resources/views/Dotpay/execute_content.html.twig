@@ -1,0 +1,9 @@
+<form action="{{ dotpay_secure_url }}" method="POST" id="hatimeria_dotpay_execution_form">
+    {{ form_widget(form) }}
+</form>
+
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.getElementById('hatimeria_dotpay_execution_form').submit();
+    }, {{ submit_idle }} );
+</script>
