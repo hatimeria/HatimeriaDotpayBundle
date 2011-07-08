@@ -41,10 +41,11 @@ class DotpayController extends Controller
             return new Response('OK', 200);
         }
 
+        // <body> only for debug (will be removed soon)
         return new Response('<body>FAIL</body>', 200);
     }
 
-    // only for some test (will bed removed soon)
+    // only for some test (will be removed soon)
     public function testAction()
     {
         /* @var \Symfony\Component\HttpFoundation\Request $request */
