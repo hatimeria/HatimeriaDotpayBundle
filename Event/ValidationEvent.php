@@ -2,22 +2,15 @@
 
 namespace Hatimeria\DotpayBundle\Event;
 
+use \Hatimeria\DotpayBundle\Response\Response;
+
 class ValidationEvent extends Event
 {
-    /**
-     * @var bool
-     */
-    protected $result = false;
-
-    /**
-     * @param bool $result
-     * @return void
-     */
-    public function setValid($result)
+    public function __construct(Response $response)
     {
-        $this->executed = true;
+        parent::__construct($response);
 
-        $this->result = $result;
+        $this->result = false;
     }
 
     /**
@@ -25,7 +18,17 @@ class ValidationEvent extends Event
      */
     public function isValid()
     {
-        return true === $this->result;
+        return true === $this->getResult();
+    }
+
+    public function markAsValid()
+    {
+        $this->setResult(true);
+    }
+
+    public function markAsInvalid()
+    {
+        $this->setResult(false);
     }
 
 }

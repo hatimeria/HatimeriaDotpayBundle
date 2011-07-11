@@ -74,7 +74,7 @@ class Response
         return $this->control;
     }
 
-    public function getAmout()
+    public function getAmount()
     {
         return $this->amount;
     }

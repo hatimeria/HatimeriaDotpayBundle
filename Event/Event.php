@@ -17,6 +17,8 @@ class Event extends BaseEvent
      */
     protected $executed = false;
 
+    protected $result;
+
     public function __construct(Response $response)
     {
         $this->response = $response;
@@ -36,6 +38,23 @@ class Event extends BaseEvent
     public function isExecuted()
     {
         return true === $this->executed;
+    }
+
+    public function markAsExecuted()
+    {
+        $this->executed = true;
+    }
+
+    public function setResult($v)
+    {
+        $this->markAsExecuted();
+
+        $this->result = $v;
+    }
+
+    public function getResult()
+    {
+        return $this->result;
     }
 
 }

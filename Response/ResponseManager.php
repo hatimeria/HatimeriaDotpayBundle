@@ -62,6 +62,11 @@ class ResponseManager implements ResponseManagerInterface
 
             return false;
         }
+        if (!$event->getResult()) {
+            $this->logger->err('ResponseManager: hatimeria_dotpay.execution event finished with result false. Check logs for more information');
+
+            return false;
+        }
         
         return true;
     }
