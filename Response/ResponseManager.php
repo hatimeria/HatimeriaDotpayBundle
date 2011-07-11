@@ -86,7 +86,7 @@ class ResponseManager implements ResponseManagerInterface
 
             return false;
         }
-        if (!$conf['test_mode'] && ($response->t_id === 'TST')) {
+        if (!$conf['test_mode'] && (strpos($response->t_id, 'TST') !== false)) {
             $logger->err('DotpayBundle: We have received test transaction and hatimeria_dotpay.test_mode parameter is set to false');
 
             return false;
