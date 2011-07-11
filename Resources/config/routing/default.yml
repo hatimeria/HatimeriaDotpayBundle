@@ -1,7 +1,3 @@
 hatimeria_dotpay_response:
     pattern:  /response
     defaults: { _controller: HatimeriaDotpayBundle:Dotpay:response}
-#only for some tests (will be removed soon)
-test:
-    pattern:  /test
-    defaults: { _controller: HatimeriaDotpayBundle:Dotpay:test}

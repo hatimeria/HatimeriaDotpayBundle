@@ -41,27 +41,7 @@ class DotpayController extends Controller
             return new Response('OK', 200);
         }
 
-        // <body> only for debug (will be removed soon)
-        return new Response('<body>FAIL</body>', 200);
-    }
-
-    // only for some test (will be removed soon)
-    public function testAction()
-    {
-        /* @var \Symfony\Component\HttpFoundation\Request $request */
-        $request = $this->get('request');
-        $request->request->replace(array(
-            'id'     => 52117,
-            'status' => 'OK',
-            'amount' => 1000,
-            'control' => md5('lol'),
-            't_id' => 'TST',
-            'orginal_amount' => '1000 PLN',
-            't_status' => 4,
-            't_date' => '2009-06-05',
-            'md5' => '2f38f9c30555b6a685f1298e3e1f02d5',
-        ));
-        return $this->forward('HatimeriaDotpayBundle:Dotpay:response');
+        return new Response('FAIL', 200);
     }
 
 }
