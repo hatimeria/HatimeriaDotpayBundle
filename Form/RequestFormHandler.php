@@ -2,8 +2,9 @@
 
 namespace Hatimeria\DotpayBundle\Form;
 
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Form\Form;
-use \Symfony\Bridge\Monolog\Logger;
+use Symfony\Bridge\Monolog\Logger;
 
 class RequestFormHandler
 {
@@ -16,21 +17,37 @@ class RequestFormHandler
      */
     protected $logger;
     /**
+     * @var \Symfony\Component\Routing\Router
+     */
+    protected $router;
+    /**
      * @var array
      */
     protected $defaults;
 
-    public function __construct(Form $form, Logger $logger, array $defaults)
+    public function __construct(Form $form, Logger $logger, Router $router, array $defaults)
     {
         $this->form     = $form;
         $this->logger   = $logger;
+        $this->router   = $router;
         $this->defaults = $defaults;
     }
 
     public function process($data)
     {
         $mergedData = array_merge($this->defaults, $data);
-        $form       = $this->form;
+
+        // generating urls
+        if (isset($mergedData['url']) && $mergedData['url'] && (strpos($mergedData['url'], '/') === false)) {
+            $url = $this->router->generate($mergedData['url'], array(), true);
+            $mergedData['url'] = $url;
+        }
+        if (isset($mergedData['urlc']) && $mergedData['urlc'] && (strpos($mergedData['urlc'], '/') === false)) {
+            $urlc = $this->router->generate($mergedData['urlc'], array(), true);
+            $mergedData['urlc'] = $urlc;
+        }
+
+        $form = $this->form;
         $form->bind($mergedData);
 
         if (!$form->isValid()) {
