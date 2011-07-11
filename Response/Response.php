@@ -38,9 +38,7 @@ class Response
      * @Assert\NotBlank(message="Required")
      */
     public $md5;
-    /**
-     * @Assert\NotBlank(message="Required")
-     */
+
     public $t_date;
     /**
      * @Assert\NotBlank(message="Required")

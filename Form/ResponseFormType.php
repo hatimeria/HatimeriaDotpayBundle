@@ -5,6 +5,8 @@ namespace Hatimeria\DotpayBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use Hatimeria\FrameworkBundle\Form\EventListener\RemoveExtraDataListener;
+
 class ResponseFormType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
@@ -26,6 +28,8 @@ class ResponseFormType extends AbstractType
         $builder->add('p_info', 'text');
         $builder->add('p_email', 'text');
         $builder->add('t_date', 'text');
+
+        $builder->addEventSubscriber(new RemoveExtraDataListener());
     }
     
 }
