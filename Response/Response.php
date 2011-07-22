@@ -59,7 +59,7 @@ class Response
 
     public function isStatusMade()
     {
-        return ResponseStatus::MADE === $this->t_status;
+        return ResponseStatus::MADE === (int)$this->t_status;
     }
 
     public function getStatus()
@@ -87,4 +87,8 @@ class Response
         return $this->orginal_amount;
     }
 
+    public function getTransactionId()
+    {
+        return $this->t_id;
+    }
 }
