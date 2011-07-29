@@ -42,4 +42,8 @@ class RequestFormType extends AbstractType
         }
     }
 
+    function getName()
+    {
+        return 'request';
+    }
 }

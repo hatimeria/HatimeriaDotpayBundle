@@ -31,5 +31,14 @@ class ResponseFormType extends AbstractType
 
         $builder->addEventSubscriber(new RemoveExtraDataListener());
     }
-    
+
+    /**
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
+     */
+    function getName()
+    {
+        return 'response';
+    }
 }
