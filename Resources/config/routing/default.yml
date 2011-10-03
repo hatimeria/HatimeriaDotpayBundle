@@ -1,3 +1,7 @@
 hatimeria_dotpay_response:
     pattern:  /response
-    defaults: { _controller: HatimeriaDotpayBundle:Dotpay:response}
+    defaults: { _controller: HatimeriaDotpayBundle:Dotpay:response }
+
+hatimeria_dotpay_premium_tc:
+    pattern:  /premium-tc
+    defaults: { _controller: HatimeriaDotpayBundle:Dotpay:premiumTc }

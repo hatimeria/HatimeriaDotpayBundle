@@ -6,7 +6,11 @@ use Hatimeria\DotpayBundle\Request\PremiumTc;
 
 class PremiumTcManager extends BaseManager
 {
-    public function validate(PremiumTc $request)
+    /**
+     * @param \Hatimeria\DotpayBundle\Request\PremiumTc $request
+     * @return bool
+     */
+    public function validate($request)
     {
         $config = $this->configuration;
         $logger = $this->logger;
