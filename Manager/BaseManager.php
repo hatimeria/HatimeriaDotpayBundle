@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\DotpayBundle\Response;
+namespace Hatimeria\DotpayBundle\Manager;
 
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -8,8 +8,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Hatimeria\DotpayBundle\Event\ResponseManagerEvents as Events;
 use Hatimeria\DotpayBundle\Event\ValidationEvent;
 use Hatimeria\DotpayBundle\Event\Event;
+use Hatimeria\DotpayBundle\Response\Response;
 
-class ResponseManager implements ResponseManagerInterface
+abstract class BaseManager implements ManagerInterface
 {
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
@@ -32,10 +33,10 @@ class ResponseManager implements ResponseManagerInterface
     }
 
     /**
-     * @param Response $data
+     * @param \Hatimeria\DotpayBundle\Response\Response $response
      * @return bool
      */
-    public function execute(Response $response)
+    public function execute($response)
     {
         $this->logger->info('ResponseManager [Response]: ' . json_encode($response));
 
@@ -50,10 +51,10 @@ class ResponseManager implements ResponseManagerInterface
         $result = $this->validate($response);
         if (!$result) {
             $this->logger->err('ResponseManager: Response validation failed');
-            
+
             return false;
         }
-        
+
         $event = new Event($response);
         $this->dispatcher->dispatch(Events::EXECUTION, $event);
 
@@ -67,54 +68,9 @@ class ResponseManager implements ResponseManagerInterface
 
             return false;
         }
-        
-        return true;
-    }
-
-    protected function validate(Response $response)
-    {
-        $conf   = $this->configuration;
-        $logger = $this->logger;
-
-        if ($conf['id'] != $response->id) {
-            $logger->err(sprintf('DotpayBundle: We received response with incorrect id value got: "%s" expected: "%s"', $response->id, $conf['id']));
-
-            return false;
-        }
-        if ($response->status != "OK") {
-            $logger->err('DotpayBundle: There were some problems during dotpay.pl payment process');
-
-            return false;
-        }
-        if (!$conf['test_mode'] && (strpos($response->t_id, 'TST') !== false)) {
-            $logger->err('DotpayBundle: We have received test transaction and hatimeria_dotpay.test_mode parameter is set to false');
-
-            return false;
-        }
-
-        $phrase = 'PIN:id:control:t_id:amount:email:service:code:username:password:t_status';
-        $map = array(
-            'PIN'      => (isset($conf['pin']) ? $conf['pin'] : ''),
-            'id'       => $response->id,
-            'control'  => $response->control,
-            't_id'     => $response->t_id,
-            'amount'   => $response->amount,
-            'email'    => $response->email,
-            'service'  => $response->service,
-            'code'     => $response->code,
-            'username' => $response->username,
-            'password' => $response->password,
-            't_status' => $response->t_status,
-        );
-        $phrase = strtr($phrase, $map);
-
-        if ($response->md5 !== md5($phrase)) {
-            $logger->err('DotpayBundle: md5 checksum was incorrect');
-
-            return false;
-        }
 
         return true;
     }
 
+    abstract protected function validate($response);
 }

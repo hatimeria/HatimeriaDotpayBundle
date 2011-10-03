@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\DotpayBundle\Form;
+namespace Hatimeria\DotpayBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;

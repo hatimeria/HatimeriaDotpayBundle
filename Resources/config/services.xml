@@ -15,6 +15,15 @@
                 <argument key="test_mode">%hatimeria_dotpay.test_mode%</argument>
             </argument>
         </service>
+        <service id="hatimeria_dotpay.premium_tc.manager" class="%hatimeria_dotpay.premium_tc.manager%">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="logger" />
+            <argument type="collection">
+                <argument key="id">%hatimeria_dotpay.id%</argument>
+                <argument key="pin">%hatimeria_dotpay.pin%</argument>
+                <argument key="ip">%hatimeria_dotpay.ip%</argument>
+            </argument>
+        </service>
     </services>
     
 </container>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\DotpayBundle\Form;
+namespace Hatimeria\DotpayBundle\Form\Handler;
 
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Form\Form;

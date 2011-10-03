@@ -49,6 +49,28 @@
             <argument type="service" id="logger" />
         </service>
 
+
+        
+        <service id="hatimeria_dotpay.premium_tc.form" factory-method="getForm" factory-service="hatimeria_dotpay.premium_tc.form.builder" class="Symfony\Component\Form\Form" />
+
+        <service id="hatimeria_dotpay.premium_tc.form.builder" factory-method="createBuilder" factory-service="form.factory" class="Symfony\Component\Form\FormBuilder">
+            <argument type="service" id="hatimeria_dotpay.premium_tc.form.type" />
+            <argument />
+            <argument type="collection">
+                <argument key="data_class">%hatimeria_dotpay.forms.premium_tc.data_class%</argument>
+            </argument>
+        </service>
+
+        <service id="hatimeria_dotpay.response.form.type" class="%hatimeria_dotpay.forms.premium_tc.type%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="hatimeria_dotpay.premium_tc.form.handler" class="%hatimeria_dotpay.forms.premium_tc.handler%" scope="request">
+            <argument type="service" id="hatimeria_dotpay.premium_tc.form" />
+            <argument type="service" id="request" />
+            <argument type="service" id="logger" />
+        </service>
+
     </services>
 
 </container>
