@@ -2,7 +2,7 @@
 
 namespace Hatimeria\DotpayBundle\Event;
 
-final class ResponseManagerEvents
+final class ManagerEvents
 {
     const PRE_VALIDATE = 'hatimeria_dotpay.pre_validate';
     

@@ -8,10 +8,7 @@ use Hatimeria\DotpayBundle\Response\Response;
 
 class Event extends BaseEvent
 {
-    /**
-     * @var \Hatimeria\DotpayBundle\Response\Response
-     */
-    protected $response;
+    protected $subject;
     /**
      * @var bool
      */
@@ -19,17 +16,14 @@ class Event extends BaseEvent
 
     protected $result;
 
-    public function __construct(Response $response)
+    public function __construct($subject)
     {
-        $this->response = $response;
+        $this->subject = $subject;
     }
 
-    /**
-     * @return \Hatimeria\DotpayBundle\Response\Response
-     */
-    public function getResponse()
+    public function getSubject()
     {
-        return $this->response;
+        return $this->subject;
     }
 
     /**

@@ -2,13 +2,11 @@
 
 namespace Hatimeria\DotpayBundle\Event;
 
-use \Hatimeria\DotpayBundle\Response\Response;
-
 class ValidationEvent extends Event
 {
-    public function __construct(Response $response)
+    public function __construct($subject)
     {
-        parent::__construct($response);
+        parent::__construct($subject);
 
         $this->result = false;
     }
