@@ -61,7 +61,7 @@
             </argument>
         </service>
 
-        <service id="hatimeria_dotpay.response.form.type" class="%hatimeria_dotpay.forms.premium_tc.type%">
+        <service id="hatimeria_dotpay.premium_tc.form.type" class="%hatimeria_dotpay.forms.premium_tc.type%">
             <tag name="form.type" />
         </service>
 
